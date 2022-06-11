@@ -4,8 +4,7 @@ namespace econometrics
 {
     Table::Table(int rows, int cols):
         mRows(rows), mCols(cols),
-        mColData(mCols),
-        mRowData(mRows)
+        mData(mCols*mRows)
         {}
     
     Table::~Table(){}
