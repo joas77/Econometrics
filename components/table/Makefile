@@ -1,7 +1,9 @@
+# BOOST_LIB shall be an environment varible witth
+# boost installation path
 VPATH = src tests include
 
 STD = -std=c++17
-FLAGS = -g -Wall $(STD) -I include 
+FLAGS = -g -Wall $(STD) -I include -I $(BOOST_LIB)
 CC = g++ $(FLAGS)
 
 all: main.cpp table.o
