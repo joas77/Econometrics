@@ -1,14 +1,10 @@
 #include <iostream>
 #include <table.h>
 #include <string_view>
+#include "testUtils.h"
 #include <boost/algorithm/string.hpp>
 
 using namespace econometrics;
-void testMsg(std::string_view msg)
-{
-    std::cout << msg << std::endl;
-}
-
 
 void test_constructor_throws(std::string_view description)
 {
@@ -23,29 +19,18 @@ void test_constructor_throws(std::string_view description)
     }     
 }
 
-void test_opens_table_files(std::string_view description)
+void test_gets_rows_size(std::string_view description)
 {
     testMsg(description);
     std::string data_files_path = "./Text_data_files/";
     Table table(data_files_path + "WAGE1_description.txt", data_files_path + "wage1.txt");
-
-    std::string text = "Let me split this into words";
-    std::vector<std::string> results;
-
-    boost::split(results, text, [](char c){return c == ' ';});
-
-    for (auto & result : results)
-    {
-        std::cout<< result << "\n";
-    }
-    
+    assertTrue(table.getRowsSize() == 526, "file should cointains 526 rows");
 }
 
 void test_table()
 {
-
     testMsg("********** Testing Table class ******************");
     test_constructor_throws("---- constructor throws if pahts where table info and description are invalid ---- ");
-    test_opens_table_files("--- constructors is able to open files -- ");
+    test_gets_rows_size("--- get number of rows -- ");
 
 }

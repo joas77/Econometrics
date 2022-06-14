@@ -1,8 +1,8 @@
 #include <table.h>
 #include <fstream>
 #include <iostream>
-#include <string>
-
+#include <vector>
+#include <boost/algorithm/string.hpp>
 
 
 namespace econometrics
@@ -29,12 +29,35 @@ namespace econometrics
             std::getline(fDescription, line);
             if (line.find_first_of(":") != std::string::npos)
             {
-                /* found number of rows */
-                std::cout << "FOUND\n";
-                std::cout << line << std::endl;
+                mRows = parseRows(line);
             }
             
-            std::cout << "NOT_FOUND\n";
+            if (line.find_first_of(".") != std::string::npos)
+            {
+                /* code */
+                std::vector<std::string> results;
+                boost::split(results, line, [](char c){ return c == '.';});
+                for (auto &r : results)
+                {
+                    std::cout << r << std::endl;
+                }
+                
+            }
+            
         }
+
+    }
+
+    int Table::parseRows(std::string_view line)
+    {
+        std::vector<std::string> results;
+        boost::split(results, line, [](char c){ return c == ':'; });
+        boost::trim(results.at(1));
+        return std::stoi(results.at(1));
+    }
+
+    int Table::getRowsSize()
+    {
+        return mRows;
     }
 } // namespace econometrics

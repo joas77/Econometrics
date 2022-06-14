@@ -2,6 +2,7 @@
 #include <vector>
 #include <iterator>
 #include <algorithm>
+#include <string_view>
 #include <filesystem>
 
 namespace econometrics{
@@ -11,12 +12,14 @@ namespace econometrics{
     private:
         int mRows, mCols;
         void parseFileDescription(fs::path fileDescription);
+        int parseRows(std::string_view line);
 
     public:
         Table() = delete;
         Table(fs::path fileDescription, fs::path fileContent);
         ~Table();
         
+        int getRowsSize();
         void transpose();
         void print();
 

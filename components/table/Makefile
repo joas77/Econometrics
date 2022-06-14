@@ -17,8 +17,6 @@ test: tests.cpp table.o
 table.o: table.cpp table.h
 	$(CC) -c $<
 
-
-
 clean:
 	rm table*;  rm test*
 
