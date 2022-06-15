@@ -12,11 +12,10 @@ all: main.cpp table.o
 test: tests.cpp table.o
 	$(CC) $^ -o tests/tests
 	cd tests && ./tests
-#	cd -
 
 table.o: table.cpp table.h
 	$(CC) -c $<
 
 clean:
-	rm table*;  rm test*
+	rm table*;  rm tests/tests
 

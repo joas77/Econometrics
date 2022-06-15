@@ -2,13 +2,13 @@
 #include <table.h>
 #include <string_view>
 #include "testUtils.h"
-#include <boost/algorithm/string.hpp>
 
 using namespace econometrics;
 
-void test_constructor_throws(std::string_view description)
+bool test_constructor_throws(std::string_view description)
 {
     testMsg(description);
+    bool testResult = false;
     try
     {
         Table table("./invalid_file_path.txt", "./invalid_file_path.txt");
@@ -16,21 +16,24 @@ void test_constructor_throws(std::string_view description)
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
-    }     
+        testResult = true;
+    }
+
+    return testResult;    
 }
 
-void test_gets_rows_size(std::string_view description)
+bool test_gets_rows_size(std::string_view description)
 {
     testMsg(description);
     std::string data_files_path = "./Text_data_files/";
     Table table(data_files_path + "WAGE1_description.txt", data_files_path + "wage1.txt");
-    assertTrue(table.getRowsSize() == 526, "file should cointains 526 rows");
+    return assertTrue(table.getRowsSize() == 526, "file should cointains 526 rows");
 }
 
-void test_table()
+bool test_get_columns_size(std::string_view desc)
 {
-    testMsg("********** Testing Table class ******************");
-    test_constructor_throws("---- constructor throws if pahts where table info and description are invalid ---- ");
-    test_gets_rows_size("--- get number of rows -- ");
-
+    testMsg(desc);
+    std::string data_files_path = "./Text_data_files/";
+    Table table(data_files_path + "WAGE1_description.txt", data_files_path + "wage1.txt");
+    return assertTrue(table.getColumnsSize() == 24, "file should cointains 24 columns");
 }
