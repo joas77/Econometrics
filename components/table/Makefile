@@ -12,7 +12,7 @@ all: main.cpp table.o
 test: tests.cpp table.o
 	$(CC) $^ -o tests/tests
 	cd tests && ./tests
-	cd -
+#	cd -
 
 table.o: table.cpp table.h
 	$(CC) -c $<
