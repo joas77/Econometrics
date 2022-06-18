@@ -1,5 +1,6 @@
 # BOOST_LIB shall be an environment varible witth
 # boost installation path
+BOOST_LIB?=../../libs/boost_1_79_0/
 VPATH = src tests include
 
 STD = -std=c++17

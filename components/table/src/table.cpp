@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <regex>
 #include <boost/algorithm/string.hpp>
 
 
@@ -40,24 +41,34 @@ namespace econometrics
             
             if (line.find('.') != std::string::npos)
             {
-                /* code */
                 std::vector<std::string> results;
                 boost::split(results, line, [](char c){ return c == '.';});
-
+                /*
                 for (auto &r : results)
                 {
-                    
                     std::cout << r << std::endl;
                 }
+                */
+                std::regex regex{"(\\d+)\\. (\\w+)\\s+(\\w+.*)"};
+                auto titleBegin = std::sregex_iterator(
+                    line.begin(), line.end(), regex
+                );
+                auto tittleEnd = std::sregex_iterator();
 
+                for(std::sregex_iterator i=titleBegin; i!=tittleEnd; ++i)
+                {
+                    std::smatch match = *i;
+                    std::string match_str = match.str();
+                    std::cout << match_str << std::endl;
+                }
+                /*
                 Title t;
                 t.id = std::stoi(results.at(0));
 
                 tableColumns[t]=std::vector<std::string>();
-
-                
-                
+                */               
             }
+            
             
         }
 

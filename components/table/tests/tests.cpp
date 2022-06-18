@@ -7,5 +7,5 @@ BOOST_AUTO_TEST_CASE(table_test)
     testMsg("********** Testing Table class ******************");
     BOOST_TEST(test_constructor_throws("---- constructor throws if pahts where table info and description are invalid ---- "));
     BOOST_TEST(test_gets_rows_size("--- get number of rows -- "));
-    //BOOST_TEST(test_get_columns_size("--- get number of columns ---"));
+    BOOST_TEST(test_get_columns_size("--- get number of columns ---"));
 }
