@@ -38,40 +38,25 @@ namespace econometrics
             {
                 mRows = parseRows(line);
             }
-            
-            if (line.find('.') != std::string::npos)
+            else if (line.find('.') != std::string::npos)
             {
                 std::vector<std::string> results;
-                boost::split(results, line, [](char c){ return c == '.';});
-                /*
-                for (auto &r : results)
-                {
-                    std::cout << r << std::endl;
-                }
-                */
-                std::regex regex{"(\\d+)\\. (\\w+)\\s+(\\w+.*)"};
-                auto titleBegin = std::sregex_iterator(
-                    line.begin(), line.end(), regex
-                );
-                auto tittleEnd = std::sregex_iterator();
+                std::regex regex{"(\\d+). (\\w+)\\s+(.+)"};
+                std::match_results<std::string::const_iterator> matchResults;
 
-                for(std::sregex_iterator i=titleBegin; i!=tittleEnd; ++i)
-                {
-                    std::smatch match = *i;
-                    std::string match_str = match.str();
-                    std::cout << match_str << std::endl;
-                }
-                /*
-                Title t;
-                t.id = std::stoi(results.at(0));
+                std::regex_search(line, matchResults, regex);
 
-                tableColumns[t]=std::vector<std::string>();
-                */               
-            }
-            
-            
+                if(matchResults.size()>2) //first match is the whole regex match
+                {
+                    Title t;
+                    t.id = std::stoi(matchResults[1]);
+                    t.name = matchResults[2];
+                    t.description = matchResults[3];
+
+                    tableColumns[t]=std::vector<std::string>();
+                }               
+            }            
         }
-
     }
 
     int Table::parseRows(std::string_view line)
