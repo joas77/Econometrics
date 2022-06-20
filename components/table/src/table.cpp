@@ -53,7 +53,7 @@ namespace econometrics
                     t.name = matchResults[2];
                     t.description = matchResults[3];
 
-                    tableColumns[t]=std::vector<std::string>();
+                    tableColumns[t]=std::vector<std::string>(mRows);
                 }               
             }            
         }
@@ -75,5 +75,10 @@ namespace econometrics
     int Table::getColumnsSize()
     {
         return tableColumns.size();
+    }
+
+    void Table::print()
+    {
+        
     }
 } // namespace econometrics
