@@ -34,6 +34,7 @@ namespace econometrics{
         
         int getRowsSize();
         int getColumnsSize();
+        const std::string getCell(int x, int y);
         void transpose();
         void print();
 

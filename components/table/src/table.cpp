@@ -77,6 +77,11 @@ namespace econometrics
         return tableColumns.size();
     }
 
+    const std::string getCell(int x, int y)
+    {
+        return "3.10";
+    }
+
     void Table::print()
     {
         
